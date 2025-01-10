@@ -11,7 +11,12 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/fredericEducentre/jenkins_project_go.git'
             }
         }
-        
+        stage('build') {
+            steps {
+                sh "docker build . -t current_time_go"
+                sh "docker run --rm current_time_go"
+            }
+        }
          stage('Contrôle qualité') {
             steps {
                 sh '''
